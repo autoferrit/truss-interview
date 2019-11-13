@@ -1,0 +1,9 @@
+[tool.poetry]
+name = "truss"
+version = "0.0.1"
+description = "coding sample"
+authors = ["Shawn McElroy <shawn@writingco.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pytz = "^2019.2"
