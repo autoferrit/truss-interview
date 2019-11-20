@@ -20,7 +20,7 @@ def fix_timestamp(record):
     """Make sure timestamps are in EST/ISO8601 format"""
     pdt = timezone('US/Pacific')
     est = timezone('US/Eastern')
-    from_fmt = '%m/%d/%y %H:%M:%S %p'
+    from_fmt = '%m/%d/%y %I:%M:%S %p'
 
     # create datetime object
     date_obj = dt.strptime(record, from_fmt)
@@ -38,7 +38,7 @@ def time_to_seconds(ts):
     """Convert H:M:S.m to total seconds."""
     hour, minute, second = [float(t) for t in ts.split(':')]
 
-    return str((hour * 60 + minute) * 60 + second)
+    return (hour * 60.0 + minute) * 60.0 + second
 
 def write(text):
     """Write to stdout."""
@@ -66,10 +66,10 @@ for line in reader:
     bartime = time_to_seconds(line[5])
 
     # total
-    total = footime + bartime
+    total = str(footime + bartime)
 
     # notes
     notes = f'"{line[7]}"'
 
-    write(','.join([timestamp, address, zip, fullname, footime, bartime, total, notes]))
+    write(','.join([timestamp, address, zip, fullname, str(footime), str(bartime), total, notes]))
 
